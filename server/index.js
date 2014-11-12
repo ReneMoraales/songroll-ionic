@@ -18,14 +18,30 @@ app.get('/search/:query', function(req, res){
       var results = [];
       lastfmResults = JSON.parse(lastfmResults);
 
-      lastfmResults.results.trackmatches.track.forEach(function(item, i){
+      var lastfmResultsCount = parseInt(lastfmResults.results['opensearch:totalResults']);
+      var lastfmResultsArray = [];
+
+      if ( lastfmResultsCount == 1 ) {
+        lastfmResultsArray = [ lastfmResults.results.trackmatches.track ];
+      } else if ( lastfmResultsCount > 1 ) {
+        lastfmResultsArray = lastfmResults.results.trackmatches.track;
+      }
+
+      lastfmResultsArray.forEach(function(item, i){
         var track = {};
-        track.id = 1;
+
         track.title = item.name;
         track.artist = item.artist;
+
         if ( item.image ) {
           track.image_url = item.image[3]['#text'];
         }
+
+        var trackIdBuffer = new Buffer(track.title + '<--->' + track.artist);
+        var trackIdString = trackIdBuffer.toString('base64');
+
+        track.id = trackIdString;
+
         results.push(track);
       });
 
