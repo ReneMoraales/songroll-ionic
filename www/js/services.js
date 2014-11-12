@@ -11,7 +11,7 @@ angular.module('starter.services', [])
 
     getInfo: function(trackId, callback){
       var trackId = encodeURIComponent(trackId);
-      $http.get('http://localhost:4370/track/' + trackId).success(function(res){
+      $http.get('http://localhost:4730/track/' + trackId).success(function(res){
         callback(res);
       });
     }

@@ -1,61 +1,11 @@
 // Ionic Starter App
 
-$(document).on('submit', '#songLookup', function(e){
-  e.preventDefault();
-  var query = $('#songLookup input').val();
-  $('#songLookup input').val('');
-  audioFromString(query);
-});
-
-audioFromString = function(string){
-  var query = encodeURIComponent(string);
-  $.post('https://www.tumblr.com/search/'+query, {
-    q: string,
-    sort: 'top',
-    post_view: 'masonry',
-    blogs_before: 1,
-    num_blogs_shown: 0,
-    num_posts_shown: 0,
-    before: 0,
-    blog_page: 2,
-    post_page: 1,
-    filter_nsfw: true,
-    filter_post_type: 'audio',
-    next_ad_offset: 0,
-    ad_placement_id: 0,
-    more_posts: true
-  }, function(r){
-    var html = $('<div id="songroll_tumblr_thief">'+r+'</div>');
-    var post = html.find('#search_posts article').first();
-    var postId = post.attr('data-post-id');
-    var postTumblelog = post.attr('data-tumblelog-name');
-
-    $.get('https://api.tumblr.com/v2/blog/'+postTumblelog+'.tumblr.com/posts?id='+postId+'&api_key=HHEnu3jZpQNGOIOdlsCxRM96iww8QwjHRvnjn343BYj5f5hjr8', function(r2){
-      var audioURL = r2.response.posts[0].audio_url;
-
-      if ( audioURL.indexOf('tumblr.com/audio_file') > -1 ) {
-        var pieces = audioURL.split('/');
-        audioURL = 'https://a.tumblr.com/'+pieces[pieces.length-1]+'o1.mp3';
-      }
-
-      $('#audio_player').remove();
-      $('<audio id="audio_player" controls><source src="'+audioURL+'" type="audio/mpeg"></audio>').appendTo('ion-content .scroll');
-
-      $('#audio_player')[0].addEventListener('error', function(e){
-        console.log(e.target.error.code);
-      });
-
-      console.log(audioURL);
-    }, 'json');
-  });
-}
-
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services', 'starter.filters'])
 
 .run(function($ionicPlatform, $cordovaStatusbar) {
   $ionicPlatform.ready(function() {

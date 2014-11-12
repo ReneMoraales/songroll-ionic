@@ -27,9 +27,20 @@ angular.module('starter.controllers', [])
 
 .controller('TrackDetailCtrl', function($scope, $stateParams, Music) {
   $scope.trackLoading = true;
-  
+
   $scope.track = {};
   $scope.track.title = 'Cargando...';
+
+  if ( window.localStorage.getItem('trackInfo_' + $stateParams.trackId) ) {
+    $scope.track = JSON.parse(window.localStorage.getItem('trackInfo_' + $stateParams.trackId));
+    $scope.trackLoading = false;
+  } else {
+    Music.getInfo($stateParams.trackId, function(response){
+      $scope.trackLoading = false;
+      $scope.track = response;
+      window.localStorage.setItem('trackInfo_' + $stateParams.trackId, JSON.stringify(response));
+    })
+  }
 })
 
 .controller('AccountCtrl', function($scope) {
