@@ -4,12 +4,12 @@
   top: 0 !important;
 }
 
-#search-loader {
+#loader {
   padding: 20px 0;
   text-align: center;
 }
 
-#search-loader img {
+#loader img {
   display: block;
   margin: 0 auto;
   width: 34px;

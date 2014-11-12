@@ -10,11 +10,13 @@ angular.module('starter.controllers', [])
 
   $scope.searchTrack = function(e){
     $scope.searchLoading = true;
+
     Music.search($scope.searchData.query, function(response) {
       $scope.searchResults = response;
       window.localStorage.setItem('searchResults', JSON.stringify(response));
       $scope.searchLoading = false;
     });
+
     $scope.searchData.query = '';
   }
 })
@@ -24,7 +26,10 @@ angular.module('starter.controllers', [])
 })
 
 .controller('TrackDetailCtrl', function($scope, $stateParams, Music) {
-  $scope.track = Music.getInfo($stateParams.trackId);
+  $scope.trackLoading = true;
+  
+  $scope.track = {};
+  $scope.track.title = 'Cargando...';
 })
 
 .controller('AccountCtrl', function($scope) {

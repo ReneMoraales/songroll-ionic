@@ -6,5 +6,6 @@
 -->
 <ion-view title="{{ track.title }}">
   <ion-content has-header="true" padding="true">
+    <div ng-if="trackLoading" id="loader"><img src="img/loader.gif"></div>
   </ion-content>
 </ion-view>
