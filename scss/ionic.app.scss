@@ -19,5 +19,56 @@ $dark:                            #444 !default;
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
-@import "www/lib/ionic/scss/ionic";
+@import "www/lib/ionic/scss/ionic.scss";
 
+#bar-search {
+  top: 0 !important;
+}
+
+#loader {
+  padding: 20px 0;
+  text-align: center;
+
+  img {
+    display: block;
+    margin: 0 auto;
+    width: 34px;
+  }
+}
+
+#search-results {
+  .item {
+    &:first-child {
+      border-top: none;
+    }
+  }
+}
+
+
+.track-details {
+  text-align: center;
+  
+  .cover-art {
+    display: inline-block;
+    width: 100%;
+  }
+
+  .info {
+    padding: 10px 0;
+
+    * { color: #333; }
+
+    h2 {
+      font-weight: bold;
+      font-size: 19px;
+      margin: 0;
+    }
+
+    h3 {
+      font-size: 15px;
+      font-weight: normal;
+      margin: 0;
+      margin-top: 2px;
+    }
+  }
+}
