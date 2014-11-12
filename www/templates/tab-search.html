@@ -1,0 +1,20 @@
+<ion-view title="Busca una canción">
+  <ion-content>
+    <ion-header-bar id="bar-search" class="item-input-inset bar bar-subheader">
+      <label class="item-input-wrapper">
+        <i class="icon ion-ios7-search placeholder-icon"></i>
+        <input ng-keyup="$event.keyCode == 13 && searchTrack()" ng-model="searchData.query" type="search" placeholder="Busca una canción o artista..">
+      </label>
+    </ion-header-bar>
+    <div>
+      <div ng-if="searchLoading" id="search-loader"><img src="img/loader.gif"></div>
+      <ion-list id="search-results">
+        <ion-item class="item-thumbnail-left" ng-repeat="track in searchResults" href="#/tab/search/{{ track.id }}">
+          <img ng-src="{{ track.image_url }}">
+          <h2>{{ track.title }}</h2>
+          <p>{{ track.artist }}</p>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-content>
+</ion-view>
