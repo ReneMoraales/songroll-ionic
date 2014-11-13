@@ -1,5 +1,4 @@
-angular.module('starter.directives', [])
-
+angular.module('songroll')
 .directive('sgrInput', [function() {
   return function(scope, element, attr) {
     element.on('input', function(event) {

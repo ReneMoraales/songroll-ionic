@@ -1,31 +1,4 @@
-angular.module('starter.controllers', [])
-
-.controller('SearchCtrl', function($scope, $timeout, Music) {
-  if ( window.localStorage.getItem('searchResults') ) {
-    $scope.searchResults = JSON.parse(window.localStorage.getItem('searchResults'));
-  }
-
-  $scope.searchLoading = false;
-  $scope.searchData = {};
-
-  $scope.searchTrack = function(e){
-    $(e.target).blur();
-    $scope.searchLoading = true;
-
-    Music.search($scope.searchData.query, function(response) {
-      $scope.searchResults = response;
-      window.localStorage.setItem('searchResults', JSON.stringify(response));
-      $scope.searchLoading = false;
-    });
-
-    $scope.searchData.query = '';
-  }
-})
-
-.controller('FavoritesCtrl', function($scope) {
-  // $scope.friends = Friends.all();
-})
-
+angular.module('songroll')
 .controller('TrackDetailCtrl', function($rootScope, $scope, $stateParams, $ionicActionSheet, Music, Favorites) {
   $rootScope.currentTrack = {};
   $rootScope.currentTrack.title = 'Cargando...';
