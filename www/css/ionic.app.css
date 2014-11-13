@@ -7908,3 +7908,49 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
       font-weight: normal;
       margin: 0;
       margin-top: 2px; }
+
+#now-playing {
+  bottom: 48px;
+  position: fixed;
+  width: 100%;
+  z-index: 20;
+  height: 56px;
+  overflow: hidden;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+  opacity: 1;
+  text-decoration: none; }
+  #now-playing .background-cover-art {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    margin-top: -50%;
+    -webkit-filter: blur(10px); }
+  #now-playing .info {
+    position: relative;
+    padding: 10px;
+    padding-left: 57px;
+    height: 56px;
+    background-color: rgba(0, 0, 0, 0.6); }
+    #now-playing .info .cover-art {
+      position: absolute;
+      height: 40px;
+      left: 8px;
+      top: 8px; }
+    #now-playing .info h2 {
+      color: white;
+      font-size: 16px;
+      margin: 0; }
+    #now-playing .info h3 {
+      color: white;
+      font-weight: normal;
+      font-size: 13px;
+      margin: 0;
+      margin-top: 2px; }
+  #now-playing.activated .info {
+    background-color: rgba(0, 0, 0, 0.75); }
+    #now-playing.activated .info * {
+      opacity: 0.75; }
+  #now-playing.track-detail-active {
+    opacity: 0; }

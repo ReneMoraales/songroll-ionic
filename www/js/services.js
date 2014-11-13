@@ -4,10 +4,20 @@ angular.module('starter.services', [])
   return {
     setup: function(){
       trackPlayer.addEventListener('durationchange', function(){
-        $rootScope.$broadcast('trackPlayerDuration', trackPlayer.duration);
+        $rootScope.playerData.duration = trackPlayer.duration;
+        $rootScope.$apply();
       });
       trackPlayer.addEventListener('timeupdate', function(){
-        $rootScope.$broadcast('trackPlayerCurrentTime', trackPlayer.currentTime);
+        $rootScope.playerData.currentTime = trackPlayer.currentTime;
+        $rootScope.$apply();
+      });
+      trackPlayer.addEventListener('playing', function(){
+        $rootScope.trackPlaying = true;
+        $rootScope.$apply();
+      });
+      trackPlayer.addEventListener('pause', function(){
+        $rootScope.trackPlaying = false;
+        $rootScope.$apply();
       });
     }
   }

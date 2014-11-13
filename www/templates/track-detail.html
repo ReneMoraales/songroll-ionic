@@ -1,28 +1,22 @@
-<!--
-  This template loads for the 'tab.friend-detail' state (app.js)
-  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
-  The FriendsCtrl pulls data from the Friends service (service.js)
-  The Friends service returns an array of friend data
--->
-<ion-view title="{{ track.title }}">
+<ion-view title="{{ $root.currentTrack.title }}">
   <ion-content has-header="true">
-    <div ng-if="trackLoading" id="loader"><img src="img/loader.gif"></div>
-    <div ng-if="!trackLoading" class="track-details">
+    <div ng-if="$root.trackLoading" id="loader"><img src="img/loader.gif"></div>
+    <div ng-if="!$root.trackLoading" class="track-details">
       <div class="play-toggle-container">
         <a ng-click="playerControls.playPause()" class="play-toggle">
-          <i ng-if="!trackPlaying" class="icon ion-ios7-play"></i>
-          <i ng-if="trackPlaying" class="icon ion-ios7-pause"></i>
+          <i ng-if="!$root.trackPlaying" class="icon ion-ios7-play"></i>
+          <i ng-if="$root.trackPlaying" class="icon ion-ios7-pause"></i>
         </a>
-        <img ng-src="{{ track.image_url }}" class="cover-art">
+        <img ng-src="{{ $root.currentTrack.image_url }}" class="cover-art">
       </div>
       <div class="track-seeker-container range range-positive">
-        <span>{{ playerControls.currentTime | date: 'mm:ss' }}</span>
-        <input id="track-seeker" type="range" name="seeker" min="0" max="{{ playerControls.duration }}" ng-model="playerControls.currentTime" sgr-input="playerControls.seek()">
-        <span>{{ playerControls.duration | date: 'mm:ss' }}</span>
+        <span ng-if="$root.playerData.currentTime >= 0">{{ $root.playerData.currentTime * 1000 | date: 'mm:ss' }}</span>
+        <input id="track-seeker" type="range" name="seeker" min="0" max="{{ $root.playerData.duration }}" ng-model="$root.playerData.currentTime" sgr-input="playerControls.seek()">
+        <span ng-if="$root.playerData.duration >= 0">{{ $root.playerData.duration * 1000 | date: 'mm:ss' }}</span>
       </div>
       <div class="info">
-        <h2>{{ track.title }}</h2>
-        <h3>{{ track.artist }}</h3>
+        <h2>{{ $root.currentTrack.title }}</h2>
+        <h3>{{ $root.currentTrack.artist }}</h3>
       </div>
     </div>
   </ion-content>

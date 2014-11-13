@@ -5,16 +5,12 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title>Songroll</title>
 
-
-    <!-- compiled css output -->
     <link href="css/ionic.app.css" rel="stylesheet">
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
 
-    <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
-    <!-- your app's js -->
     <script src="lib/jquery/dist/jquery.min.js"></script>
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
@@ -25,19 +21,21 @@
   <body ng-app="starter" animation="slide-left-right-ios7">
     <audio id="track-player"></audio>
 
-    <!-- 
-      The nav bar that will be updated as we navigate between views.
-    -->
     <ion-nav-bar class="bar-positive nav-title-slide-ios7">
       <ion-nav-back-button class="button-icon icon  ion-ios7-arrow-back">
         Volver
       </ion-nav-back-button>
     </ion-nav-bar>
-    <!-- 
-      The views will be rendered in the <ion-nav-view> directive below
-      Templates are in the /templates folder (but you could also
-      have templates inline in this html file if you'd like).
-    -->
+
     <ion-nav-view></ion-nav-view>
+
+    <a id="now-playing" ui-sref="tab.search-track-detail({ trackId: $root.currentTrack.id })" ui-sref-active="track-detail-active" ng-if="$root.currentTrack.loaded">
+      <img class="background-cover-art" ng-src="{{ $root.currentTrack.image_url }}">
+      <div class="info">
+        <img class="cover-art" ng-src="{{ $root.currentTrack.image_url }}">
+        <h2>{{ $root.currentTrack.title }}</h2>
+        <h3>{{ $root.currentTrack.artist }}</h3>
+      </div>
+    </a>
   </body>
 </html>

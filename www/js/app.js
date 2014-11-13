@@ -7,7 +7,8 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services', 'starter.filters', 'starter.directives'])
 
-.run(function($ionicPlatform, $cordovaStatusbar, Player) {
+.run(function($rootScope, $ionicPlatform, $cordovaStatusbar, Player) {
+  $rootScope.playerData = {};
   $ionicPlatform.ready(function() {
     Player.setup();
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -70,7 +71,7 @@ angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter
     })
 
     .state('tab.favorites-track-detail', {
-      url: '/favories/:trackId',
+      url: '/favorites/:trackId',
       views: {
         'tab-favorites': {
           templateUrl: 'templates/track-detail.html',
