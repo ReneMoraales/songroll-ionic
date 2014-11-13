@@ -5,10 +5,11 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services', 'starter.filters'])
+angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services', 'starter.filters', 'starter.directives'])
 
-.run(function($ionicPlatform, $cordovaStatusbar) {
+.run(function($ionicPlatform, $cordovaStatusbar, Player) {
   $ionicPlatform.ready(function() {
+    Player.setup();
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if(window.cordova && window.cordova.plugins.Keyboard) {

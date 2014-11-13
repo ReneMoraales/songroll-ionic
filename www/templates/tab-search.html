@@ -2,8 +2,8 @@
   <ion-content>
     <ion-header-bar id="bar-search" class="item-input-inset bar bar-subheader">
       <label class="item-input-wrapper">
-        <i class="icon ion-ios7-search placeholder-icon"></i>
-        <input ng-keyup="$event.keyCode == 13 && searchTrack()" ng-model="searchData.query" type="search" placeholder="Busca una canción o artista..">
+        <i class="icon ion-ios7-search-strong placeholder-icon"></i>
+        <input ng-keyup="$event.keyCode == 13 && searchTrack($event)" ng-model="searchData.query" type="search" placeholder="Busca una canción o artista..">
       </label>
     </ion-header-bar>
     <div>

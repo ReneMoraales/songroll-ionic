@@ -23,6 +23,15 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 #bar-search {
   top: 0 !important;
+  padding-top: 16px;
+  border-bottom: 0;
+  background-image: none;
+
+  .icon {
+    padding-right: 0px;
+    font-size: 17px;
+    padding-left: 3px;
+  }
 }
 
 #loader {
@@ -37,7 +46,14 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 }
 
 #search-results {
+  position: relative;
+  top: 5px;
+
   .item {
+    a {
+      padding-top: 30px;
+    }
+
     &:first-child {
       border-top: none;
     }
@@ -48,13 +64,82 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .track-details {
   text-align: center;
   
-  .cover-art {
-    display: inline-block;
-    width: 100%;
+  .play-toggle-container {
+    position: relative;
+
+    .play-toggle {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      left: 50%;
+      top: 50%;
+      margin-top: -50px;
+      margin-left: -50px;
+      background-color: rgba(255,255,255,.9);
+      border-radius: 50%;
+      color: #333;
+      font-size: 72px;
+      line-height: 102px;
+      cursor: pointer;
+      box-shadow: 0px 4px 20px rgba(0,0,0,0.3);
+
+      &.activated {
+        background-color: white;
+      }
+
+      .ion-ios7-play {
+        position: relative;
+        left: 4px;
+      }
+
+      .ion-ios7-pause {
+        font-size: 64px;
+        position: relative;
+        bottom: 3px;
+      }
+    }
+
+    .cover-art {
+      display: block;
+      width: 100%;
+
+      @media only screen and (max-height: 540px) {
+        width: 70%;
+        margin: 18px auto 8px;
+      }
+    }
+  }
+
+  .track-seeker-container {
+    color: #555;
+    font-size: 13px;
+
+    @media only screen and (max-height: 540px) {
+      padding: 0 20px;
+    }
+  }
+
+  #track-seeker {
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #eee), color-stop(100%, #eee));
+    background-image: linear-gradient(to right, #eee 0%, #eee 100%);
+    background-size: 99% 8px;
+
+    &::-webkit-slider-thumb {
+      background-color: $positive;
+      box-shadow: none;
+      border-radius: 2px;
+      width: 3px;
+      border: none;
+      outline: none;
+    }
+
+    &::-webkit-slider-thumb:before {
+      background: transparent;
+    }
   }
 
   .info {
-    padding: 10px 0;
+    padding: 5px 0;
 
     * { color: #333; }
 

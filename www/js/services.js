@@ -1,5 +1,17 @@
 angular.module('starter.services', [])
-
+.factory('Player', function($rootScope){
+  var trackPlayer = $('#track-player')[0];
+  return {
+    setup: function(){
+      trackPlayer.addEventListener('durationchange', function(){
+        $rootScope.$broadcast('trackPlayerDuration', trackPlayer.duration);
+      });
+      trackPlayer.addEventListener('timeupdate', function(){
+        $rootScope.$broadcast('trackPlayerCurrentTime', trackPlayer.currentTime);
+      });
+    }
+  }
+})
 .factory('Music', function($http, $timeout){
   return {
     search: function(query, callback){
