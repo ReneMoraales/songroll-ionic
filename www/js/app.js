@@ -1,4 +1,4 @@
-angular.module('songroll', ['ionic', 'ngCordova'])
+angular.module('songroll', ['ionic', 'ngCordova', 'mediaPlayer'])
 
 .run(function($rootScope, $ionicPlatform, $cordovaStatusbar, Player, Favorites) {
   $rootScope.playerData = {};

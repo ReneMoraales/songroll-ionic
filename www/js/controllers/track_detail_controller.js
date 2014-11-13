@@ -1,28 +1,16 @@
 angular.module('songroll')
-.controller('TrackDetailCtrl', function($rootScope, $scope, $stateParams, $ionicActionSheet, Music, Favorites) {
-  $rootScope.currentTrack = {};
-  $rootScope.currentTrack.title = 'Cargando...';
+.controller('TrackDetailCtrl', function($rootScope, $scope, $stateParams, $ionicActionSheet, Music, Favorites, Player) {
+  $scope.player = Player;
 
-  $rootScope.trackLoading = true;
+  Player.loading = true; // trackLoading
+
+  $scope.player.track = {};
+  $scope.player.trackInfo.title = 'Cargando...';
 
   $scope.playerControls = {};
 
-  var trackPlayer = $('#track-player')[0];
-
-  $scope.playerControls.playPause = function(){
-    if ( trackPlayer.paused ) {
-      trackPlayer.play();
-    } else {
-      trackPlayer.pause();
-    }
-  };
-
-  $scope.playerControls.seek = function() {
-    trackPlayer.currentTime = Math.floor($rootScope.playerData.currentTime);
-  }
-
   $scope.isFavoriteClass = function() {
-    if ( Favorites.isFavorite($rootScope.currentTrack.id) ) {
+    if ( Favorites.isFavorite($scope.player.trackInfo.id) ) {
       return 'ion-ios7-star';
     }
     return 'ion-ios7-star-outline';
@@ -34,34 +22,38 @@ angular.module('songroll')
       cancelText: 'Cancelar',
       destructiveText: 'Eliminar de mis favoritos',
       destructiveButtonClicked: function() {
-        Favorites.toggleFavorite($rootScope.currentTrack);
+        Favorites.toggleFavorite($scope.player.trackInfo);
         return true;
       }
     };
 
-    if ( Favorites.isFavorite($rootScope.currentTrack.id) ) {
+    if ( Favorites.isFavorite($scope.player.trackInfo.id) ) {
       $ionicActionSheet.show(options);
     } else {
-      Favorites.toggleFavorite($rootScope.currentTrack);
+      Favorites.toggleFavorite($scope.player.trackInfo);
     }
 
   }
 
   var trackLoaded = function(){
-    $rootScope.currentTrack.loaded = true;
-    $rootScope.trackLoading = false;
-      if ( trackPlayer.paused || trackPlayer.src != $rootScope.currentTrack.audio_url ) {
-        trackPlayer.src = $rootScope.currentTrack.audio_url;
-        trackPlayer.play();
-      }
+    $scope.player.loaded = true;
+    $scope.player.loading = false;
+    if ( $scope.player.trackPlayer.paused || $scope.player.playerTrackURL != $scope.player.trackInfo.audio_url ) {
+      $scope.player.playerTrackURL = $scope.player.trackInfo.audio_url;
+      $scope.player.trackPlayer.load({
+        src: $scope.player.playerTrackURL,
+        type: 'audio/mpeg'
+      })
+      $scope.player.trackPlayer.play();
+    }
   }
 
   if ( window.localStorage.getItem('trackInfo_' + $stateParams.trackId) ) {
-    $rootScope.currentTrack = JSON.parse(window.localStorage.getItem('trackInfo_' + $stateParams.trackId));
+    $scope.player.trackInfo = JSON.parse(window.localStorage.getItem('trackInfo_' + $stateParams.trackId));
     trackLoaded();
   } else {
     Music.getInfo($stateParams.trackId, function(response){
-      $rootScope.currentTrack = response;
+      $scope.player.trackInfo = response;
       window.localStorage.setItem('trackInfo_' + $stateParams.trackId, JSON.stringify(response));
       trackLoaded();
     })

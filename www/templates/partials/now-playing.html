@@ -1,0 +1,8 @@
+ <a id="now-playing" ui-sref="tab.search-track-detail({ trackId: player.trackInfo.id })" ui-sref-active="track-detail-active" ng-if="player.loaded">
+  <img class="background-cover-art" ng-src="{{ player.trackInfo.image_url }}">
+  <div class="info">
+    <img class="cover-art" ng-src="{{ player.trackInfo.image_url }}">
+    <h2>{{ player.trackInfo.title }}</h2>
+    <h3>{{ player.trackInfo.artist }}</h3>
+  </div>
+</a>
