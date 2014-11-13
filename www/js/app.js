@@ -7,10 +7,12 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'ngCordova', 'starter.controllers', 'starter.services', 'starter.filters', 'starter.directives'])
 
-.run(function($rootScope, $ionicPlatform, $cordovaStatusbar, Player) {
+.run(function($rootScope, $ionicPlatform, $cordovaStatusbar, Player, Favorites) {
   $rootScope.playerData = {};
+
   $ionicPlatform.ready(function() {
     Player.setup();
+    Favorites.setup();
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if(window.cordova && window.cordova.plugins.Keyboard) {

@@ -1,9 +1,11 @@
 <ion-view title="Favoritos">
   <ion-content>
-    <ion-list>
-      <ion-item ng-repeat="friend in friends" type="item-text-wrap" href="#/tab/favorites/{{friend.id}}">
-        {{friend.name}}
-      </ion-item>
-    </ion-list>
+    <ion-list id="search-results">
+        <ion-item class="item-thumbnail-left" ng-repeat="track in $root.favorites" href="#/tab/search/{{ track.id }}">
+          <img ng-src="{{ track.image_url }}">
+          <h2>{{ track.title }}</h2>
+          <p>{{ track.artist }}</p>
+        </ion-item>
+      </ion-list>
   </ion-content>
 </ion-view>

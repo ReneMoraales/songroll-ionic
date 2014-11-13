@@ -5,6 +5,8 @@ var cors = require('cors');
 var app = express();
 app.use(cors());
 
+console.log('DON\'T PANIC! The Songroll Ionic Server is here.')
+
 app.get('/search/:query', function(req, res){
   res.type('application/json');
 
@@ -30,7 +32,7 @@ app.get('/search/:query', function(req, res){
       track.artist = item.artist;
 
       if ( item.image ) {
-        track.image_url = item.image[3]['#text'];
+        track.image_url = item.image[1]['#text'];
       }
 
       var trackIdBuffer = new Buffer(track.title + '<--->' + track.artist);
